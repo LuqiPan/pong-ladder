@@ -92,13 +92,13 @@ def _validate_scores(winner_score, loser_score):
     ws = winner_score
     ls = loser_score
 
-    if ws == 21:
-        if ls < 0 or ls > 20:
-            raise error
-    elif ws == 11:
-        if ls < 0 or ls > 10:
-            raise error
-    else:
+    if ws < 0 or ls < 0:
+        raise error
+
+    if ws <= ls:
+        raise error
+
+    if ws < 11 or ws - ls < 2:
         raise error
 
 
