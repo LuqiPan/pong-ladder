@@ -374,7 +374,7 @@ class TestGameListResourcePost(BaseResourceTest):
         colin = self.post_valid_player('colin')
         kumanan = self.post_valid_player('kumanan')
 
-        bad_scores = ((21, 21), (11, 11), (22, 20), (21, -1), (21, 31))
+        bad_scores = ((21, 21), (11, 11), (21, -1), (21, 31))
         for winner_score, loser_score in bad_scores:
             response, errors = self.post_game(
                 colin,
@@ -387,11 +387,9 @@ class TestGameListResourcePost(BaseResourceTest):
 
     def test_validate_good_scores(self):
 
-        good_scores = (
-            [(21, n) for n in range(0, 21)]
-            +
-            [(11, n) for n in range(0, 11)]
-        )
+        good_scores = [
+            (x, y) for x in range(11, 22) for y in range(0, x - 1)
+        ]
         for idx, (winner_score, loser_score) in enumerate(good_scores):
             colin = self.post_valid_player('colin' + str(idx))
             kumanan = self.post_valid_player('kumanan' + str(idx))
